@@ -8,6 +8,7 @@ function LoginPage() {
     const [password, setPassword] = useState('');
 
     const handleLogin = async () => {
+        e.preventDefault();
         console.log('Inside handleLogin');
     }
 
@@ -33,7 +34,7 @@ function LoginPage() {
                             <label htmlFor="password" className="form-label">Password</label>
                             <input
                                 id="password"
-                                type="text"
+                                type="password"
                                 className="form-control"
                                 placeholder="Enter your password"
                                 value={password}
