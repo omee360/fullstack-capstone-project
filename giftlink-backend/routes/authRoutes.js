@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
         //Task 3: Check for existing email
         const existingEmail = await collection.findOne({ email: req.body.email })
 
-        if (existingUser) {
+        if (existingEmail) {
             return res.status(400).json({
                 message: 'User already exists'
             });
@@ -47,6 +47,9 @@ router.post('/register', async (req, res) => {
                 id: newUser.insertedId
             }
         };
+
+        const authtoken = jwt.sign(payload, JWT_SECRET);
+
         logger.info('User registered successfully');
         res.json({ authtoken, email });
     } catch (e) {
