@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
@@ -24,6 +23,12 @@ router.post('/register', async (req, res) => {
 
         //Task 3: Check for existing email
         const existingEmail = await collection.findOne({ email: req.body.email })
+
+        if (existingUser) {
+            return res.status(400).json({
+                message: 'User already exists'
+            });
+        }
 
         const salt = await bcryptjs.genSalt(10);
         const hash = await bcryptjs.hash(req.body.password, salt);
