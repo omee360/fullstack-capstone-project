@@ -9,6 +9,7 @@ const Profile = () => {
  const [updatedDetails, setUpdatedDetails] = useState({});
  const {setUserName} = useAppContext();
  const [changed, setChanged] = useState("");
+ const [error, setError] = useState("");
 
  const [editMode, setEditMode] = useState(false);
   const navigate = useNavigate();
@@ -36,7 +37,8 @@ const Profile = () => {
                 setUpdatedDetails(storedUserDetails);
               }
 } catch (error) {
-  console.error(error);
+  // console.error(error);
+  setError("Failed to update profile");
   // Handle error case
 }
 };
@@ -128,6 +130,7 @@ return (
 <p> <b>Email:</b> {userDetails.email}</p>
 <button onClick={handleEdit}>Edit</button>
 <span style={{color:'green',height:'.5cm',display:'block',fontStyle:'italic',fontSize:'12px'}}>{changed}</span>
+<span style={{ color: "red" }}>{error}</span>
 </div>
 )}
 </div>
